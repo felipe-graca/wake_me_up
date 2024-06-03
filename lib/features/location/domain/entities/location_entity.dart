@@ -2,39 +2,37 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:wake_me_up/core/features/location/data/models/location_model.dart';
+import 'package:wake_me_up/features/location/data/models/location_model.dart';
+import 'package:wake_me_up/features/location/domain/entities/lat_lng_entity.dart';
 
 class LocationEntity extends LocationModel with EquatableMixin {
   LocationEntity({
     String name = '',
     TimeOfDay timeToWakeUp = const TimeOfDay(hour: 0, minute: 0),
-    double latitude = 0,
-    double longitude = 0,
-  }) : super(latitude: latitude, longitude: longitude, name: name, timeToWakeUp: timeToWakeUp);
+    LatLngEntity latLng = const LatLngEntity(),
+  }) : super(name: name, timeToWakeUp: timeToWakeUp, latLng: latLng);
 
   @override
-  List<Object?> get props => [latitude, longitude, name, timeToWakeUp];
+  List<Object?> get props => [latLng, name, timeToWakeUp];
 
   LocationEntity copyWith({
     String? name,
     TimeOfDay? timeToWakeUp,
-    double? latitude,
-    double? longitude,
+    LatLngEntity? latLng,
   }) {
     return LocationEntity(
       name: name ?? this.name,
       timeToWakeUp: timeToWakeUp ?? this.timeToWakeUp,
-      latitude: latitude ?? this.latitude,
-      longitude: longitude ?? this.longitude,
+      latLng: latLng ?? LatLngEntity.fromModel(this.latLng),
     );
   }
 
+  //from Model
   factory LocationEntity.fromModel(LocationModel model) {
     return LocationEntity(
       name: model.name,
       timeToWakeUp: model.timeToWakeUp,
-      latitude: model.latitude,
-      longitude: model.longitude,
+      latLng: LatLngEntity.fromModel(model.latLng),
     );
   }
 }

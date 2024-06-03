@@ -2,26 +2,24 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:wake_me_up/features/location/data/models/lat_lng_model.dart';
 
 class LocationModel {
   final String name;
   final TimeOfDay timeToWakeUp;
-  final double latitude;
-  final double longitude;
+  final LatLngModel latLng;
 
   LocationModel({
     this.name = '',
     this.timeToWakeUp = const TimeOfDay(hour: 0, minute: 0),
-    this.latitude = 0,
-    this.longitude = 0,
+    this.latLng = const LatLngModel(),
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
       'timeToWakeUp': timeToWakeUp,
-      'latitude': latitude,
-      'longitude': longitude,
+      'latLng': latLng.toMap(),
     };
   }
 
@@ -29,8 +27,7 @@ class LocationModel {
     return LocationModel(
       name: map['name'] as String,
       timeToWakeUp: map['timeToWakeUp'] as TimeOfDay,
-      latitude: (map['latitude'] ?? '') as double,
-      longitude: (map['longitude'] ?? '') as double,
+      latLng: LatLngModel.fromMap(map['latLng'] as Map<String, dynamic>),
     );
   }
 

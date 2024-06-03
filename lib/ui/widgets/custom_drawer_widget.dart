@@ -18,6 +18,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
       child: Column(
         children: [
           ListView(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -34,30 +35,32 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Text('Menu'),
               ),
-              16.height,
-              ListTile(
-                leading: const Icon(
-                  Icons.location_on_sharp,
-                  color: Color(0xff2196F3),
+              24.height,
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 4),
+                child: _buildMenuItem(
+                  icon: Icons.location_on_sharp,
+                  title: 'Locations',
+                  soute: '',
                 ),
-                title: const Text('Locations'),
-                onTap: () {},
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.alarm,
-                  color: Color(0xff2196F3),
+              8.height,
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 4),
+                child: _buildMenuItem(
+                  icon: Icons.alarm,
+                  title: 'Alarms',
+                  soute: '',
                 ),
-                title: const Text('Alarms'),
-                onTap: () {},
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.settings,
-                  color: Color(0xff2196F3),
+              8.height,
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 4),
+                child: _buildMenuItem(
+                  icon: Icons.settings,
+                  title: 'Settings',
+                  soute: '',
                 ),
-                title: const Text('Settings'),
-                onTap: () {},
               ),
             ],
           ),
@@ -85,6 +88,30 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildMenuItem({
+    required IconData icon,
+    required String title,
+    required String soute,
+  }) {
+    return GestureDetector(
+      child: AbsorbPointer(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: const Color(0xff2196F3)),
+                16.width,
+                Flexible(child: Text(title)),
+              ],
+            ),
+            8.height,
+            const Divider(color: Colors.grey),
+          ],
+        ),
       ),
     );
   }

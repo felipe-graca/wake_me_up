@@ -1,4 +1,4 @@
-package br.com.gdapps.wake_me_up
+package br.com.gdapps.wakemeup
 
 import io.flutter.embedding.android.FlutterActivity
 
